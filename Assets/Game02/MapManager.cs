@@ -12,6 +12,7 @@ namespace Game02
         public Color[] color;
         public List<Color> gridColorList = new List<Color>();
 
+        private Dictionary<Vector2, Transform> rotateDict = new Dictionary<Vector2, Transform>();
         private int flag = 1;
 
         private void Awake()
@@ -21,7 +22,7 @@ namespace Game02
         }
 
         // 这个方法里面有大量的重复代码，可以对此进行封装
-        // 但是切记在修改前备份一下，避免修改后出现什么奇怪的bug
+        // 但是切记在修改前备份一下，避免修改后出现什么奇怪的bug，(你肯定会遇到bug)
         // 不要为我为什么不做，因为我懒
         private void Init()
         {
@@ -62,6 +63,7 @@ namespace Game02
                                     grid.transform.localPosition = new Vector3(j * 70, i * 120, 0);
                                 }               
                             }
+                            rotateDict.Add(new Vector2(j, i), grid.transform);
                             flag *= -1;
                         }
                     }
@@ -97,6 +99,7 @@ namespace Game02
                                     grid.transform.localPosition = new Vector3(j * 70, i * 120, 0);
                                 }
                             }
+                            rotateDict.Add(new Vector2(j, i), grid.transform);
                             flag *= -1;
                         }
                     }
@@ -130,6 +133,7 @@ namespace Game02
                                 grid.transform.localPosition = new Vector3(j * 70, i * 120, 0);
                             }
                         }
+                        rotateDict.Add(new Vector2(j, i), grid.transform);
                         flag *= -1;
                     }
                 }
