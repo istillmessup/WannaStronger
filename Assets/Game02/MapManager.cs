@@ -194,7 +194,34 @@ namespace Game02
 
         public void Rotate(int x, int y)
         {
+            Vector2 position = rotateDict[new Vector2(x, y)].localPosition;
+            Vector3 angle = rotateDict[new Vector2(x, y)].localEulerAngles;
 
+            rotateDict[new Vector2(x, y)].localPosition = rotateDict[new Vector2(x - 1, y)].localPosition;
+            rotateDict[new Vector2(x, y)].localEulerAngles = rotateDict[new Vector2(x - 1, y)].localEulerAngles;
+
+            rotateDict[new Vector2(x - 1, y)].localPosition = rotateDict[new Vector2(x - 1, y + 1)].localPosition;
+            rotateDict[new Vector2(x - 1, y)].localEulerAngles = rotateDict[new Vector2(x - 1, y + 1)].localEulerAngles;
+
+            rotateDict[new Vector2(x - 1, y + 1)].localPosition = rotateDict[new Vector2(x, y + 1)].localPosition;
+            rotateDict[new Vector2(x - 1, y + 1)].localEulerAngles = rotateDict[new Vector2(x, y + 1)].localEulerAngles;
+
+            rotateDict[new Vector2(x, y + 1)].localPosition = rotateDict[new Vector2(x + 1, y + 1)].localPosition;
+            rotateDict[new Vector2(x, y + 1)].localEulerAngles = rotateDict[new Vector2(x + 1, y + 1)].localEulerAngles;
+
+            rotateDict[new Vector2(x + 1, y + 1)].localPosition = rotateDict[new Vector2(x + 1, y)].localPosition;
+            rotateDict[new Vector2(x + 1, y + 1)].localEulerAngles = rotateDict[new Vector2(x + 1, y)].localEulerAngles;
+
+            rotateDict[new Vector2(x + 1, y)].localPosition = position;
+            rotateDict[new Vector2(x + 1, y)].localEulerAngles = angle;
+
+            Transform temp = rotateDict[new Vector2(x, y)];
+            rotateDict[new Vector2(x, y)] = rotateDict[new Vector2(x + 1, y)];
+            rotateDict[new Vector2(x + 1, y)] = rotateDict[new Vector2(x + 1, y + 1)];
+            rotateDict[new Vector2(x + 1, y + 1)] = rotateDict[new Vector2(x, y + 1)];
+            rotateDict[new Vector2(x, y + 1)] = rotateDict[new Vector2(x - 1, y + 1)];
+            rotateDict[new Vector2(x - 1, y + 1)] = rotateDict[new Vector2(x - 1, y)];
+            rotateDict[new Vector2(x - 1, y)] = temp;
         }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7519225740370442507}
   - component: {fileID: 7519225740370442506}
   - component: {fileID: 2223071378191231413}
+  - component: {fileID: 9098000332293727288}
   m_Layer: 5
   m_Name: Rotator
   m_TagString: Untagged
@@ -118,3 +119,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &9098000332293727288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7519225740370442504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52139d66e27fb44c7847ed76a155fe8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  x: 0
+  y: 0
