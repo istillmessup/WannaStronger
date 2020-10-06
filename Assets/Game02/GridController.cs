@@ -14,7 +14,16 @@ namespace Game02
             GetComponent<Button>().onClick.AddListener(() =>
             {
                 GetComponentInParent<MapManager>().Rotate(x, y);
+                Check();
             });
+        }
+
+        private void Check()
+        {
+            if (MapManager._instance.Check())
+            {
+                Debug.Log("game over");
+            }
         }
     }
 }
