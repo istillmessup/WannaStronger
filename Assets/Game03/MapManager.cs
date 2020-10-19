@@ -24,6 +24,7 @@ namespace Game03
             _instance = this;
             flag = false;
             gridParent = GameObject.Find("GridParent").transform;
+            // 开始按钮
             button1.onClick.AddListener(() =>
             {
                 flag = true;
@@ -37,6 +38,7 @@ namespace Game03
                     }
                 }
             });
+            // 显示按钮
             button2.onClick.AddListener(() =>
             {
                 flag = false;
@@ -50,6 +52,7 @@ namespace Game03
                     }
                 }
             });
+            // 隐藏按钮
             button3.onClick.AddListener(() =>
             {
                 flag = true;
@@ -69,7 +72,7 @@ namespace Game03
 
         private void Update()
         {
-            
+            //TODO:计时
         }
 
         private void Init()
