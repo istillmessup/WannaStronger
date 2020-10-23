@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace Game04
@@ -7,14 +8,28 @@ namespace Game04
     public class MapManager : MonoBehaviour
     {
         public static MapManager _instance;
+
+        // 在设置路径时最后一次被点击的立方体
+        private GameObject currCube;
+        // 立方体的坐标以及对应的GameObject(这个数据结构是为了方便更改立方体的材质)
+        private Dictionary<Vector3, GameObject> cubeDict = new Dictionary<Vector3, GameObject>();
+        
+        [HideInInspector]
         public GameObject cubePrefab;
         // 下一步可以被点击的立方体
+        [HideInInspector]
         public List<Vector3> nextPointList = new List<Vector3>();
+        // 路径上所有点的顺序集合
+        [HideInInspector]
+        public List<Vector3> pointList = new List<Vector3>();
 
         private void Awake()
         {
             _instance = this;
             Init();
+            // 如果想要出题，请注释掉下面两个方法
+            LoadLevelInfo();
+            SetRoad();
         }
 
         private void Update()
@@ -44,7 +59,8 @@ namespace Game04
                         cube.transform.localPosition = new Vector3(i, j, k);
                         CubeController c = cube.AddComponent<CubeController>();
                         c.position = new Vector3(i, j, k);
-                        // 给surfaceDict赋值，可以封装
+                        cubeDict.Add(new Vector3(i, j, k), cube);
+                        // 给surfaceDict赋值
                         if (k == 0 || k == 7)
                         {
                             Vector2 xy = new Vector2(i, j);
@@ -74,9 +90,60 @@ namespace Game04
             }
         }
 
-        // 设置下一步可以被点击(可以经过)的立方体
-        public void SetNextPoint(SurfaceTypeVector2Dictionary dict, Vector3 position)
+        private void SetRoad()
         {
+            for (int i = 0; i < Json.road.Count; i++)
+            {
+                GameObject cube = cubeDict[Json.road[i]];
+                if (i == 0)
+                {
+                    SetNextPoint(cube.GetComponent<CubeController>().surfaceDict, Json.road[i], cube, true);
+                    Material material = new Material(cube.GetComponent<MeshRenderer>().material);
+                    material.color = Color.red;
+                    cube.GetComponent<MeshRenderer>().material = material;
+                }
+                else if (i == Json.road.Count - 1)
+                {
+                    cube.GetComponent<CubeController>().flag = true;
+                    Material material = new Material(cube.GetComponent<MeshRenderer>().material);
+                    material.color = Color.green;
+                    cube.GetComponent<MeshRenderer>().material = material;
+                }
+                else
+                {
+                    cube.GetComponent<CubeController>().flag = true;
+                    Material material = new Material(cube.GetComponent<MeshRenderer>().material);
+                    material.color = Color.white;
+                    cube.GetComponent<MeshRenderer>().material = material;
+                }
+            }
+        }
+        
+        private void LoadLevelInfo()
+        {
+            int length = Directory.GetFiles("LevelInfo/Game04").Length;
+            int r = Random.Range(0, length);
+            string file = "Map_" + r;
+            Json.Load(file);
+        }
+
+        public void Check()
+        {
+            if (pointList.Count == Json.road.Count)
+            {
+                HintBox._instance.ShowMessage("牛逼");
+                GameObject.Find("MapManager").gameObject.SetActive(false);
+            }
+        }
+
+        // 设置下一步可以被点击(可以经过)的立方体
+        public void SetNextPoint(SurfaceTypeVector2Dictionary dict, Vector3 position, GameObject obj, bool flag)
+        {
+            currCube = obj; // 更新最后一个被点击的立方体
+            if (flag)
+            {
+                pointList.Add(position); // 将被点击的立方体加入路径列表中
+            }
             nextPointList.Clear();
             foreach (var item in dict)
             {
@@ -116,6 +183,33 @@ namespace Game04
                         break;
                 }
             }
+        }
+
+        // 设置终点
+        public void SetEndPoint()
+        {
+            Material material = new Material(currCube.GetComponent<MeshRenderer>().material);
+            material.color = Color.green;
+            currCube.GetComponent<MeshRenderer>().material = material;
+        }
+
+        public void Undo()
+        {
+            if (pointList.Count == 1)
+            {
+                return;
+            }
+            Vector3 v = pointList[pointList.Count - 1];
+            pointList.RemoveAt(pointList.Count - 1);
+            GameObject temp = cubeDict[v];
+            Material material = new Material(temp.GetComponent<MeshRenderer>().material);
+            material.color = Color.white;
+            temp.GetComponent<MeshRenderer>().material = material;
+            temp.GetComponent<CubeController>().flag = true;
+
+            Vector3 v1 = pointList[pointList.Count - 1];
+            GameObject temp1 = cubeDict[v1];
+            SetNextPoint(temp1.GetComponent<CubeController>().surfaceDict, v1, temp1, false);
         }
     }
 }

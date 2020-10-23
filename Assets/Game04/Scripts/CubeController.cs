@@ -8,16 +8,20 @@ namespace Game04
     {
         // 鼠标第一次点击时间、第二次点击时间
         private float start, end = 0;
-        // 判断该点是否已经被设置过
-        private bool flag = false;
+        // 出题：判断该点是否已经被设置过 答题：判断该点是否可以点击
+        [HideInInspector]
+        public bool flag = false;
         // 立方体的三维坐标
+        [HideInInspector]
         public Vector3 position;
         // key:立方体所在的面 value:在这个面上对应的二维坐标
+        [HideInInspector]
         public SurfaceTypeVector2Dictionary surfaceDict = new SurfaceTypeVector2Dictionary();
+       
         private void OnMouseDown()
         {
             start = Time.realtimeSinceStartup;
-            if (start - end < .3f)
+            if (start - end < .2f)
             {
                 // 设置起点
                 if (UIManager._instance.flag == 0)
@@ -29,31 +33,48 @@ namespace Game04
                     material.color = Color.red;
                     GetComponent<MeshRenderer>().material = material;
                     flag = true;
-                    MapManager._instance.SetNextPoint(surfaceDict, position);
+                    MapManager._instance.SetNextPoint(surfaceDict, position, this.gameObject, true);
                 }
                 // 设置沿途点
                 else if (UIManager._instance.flag == 1)
                 {
                     if (flag == true)
                     {
-                        //TODO:输出提示信息 这个点已经被设置过了
-                        HintBox._instance.ShowMessage("");
+                        HintBox._instance.ShowMessage("好马不吃回头草");
                         return;
                     }
                     if (MapManager._instance.nextPointList.Contains(position) == false)
                     {
-                        //TODO:输出提示信息 按照马走日的规范
-                        HintBox._instance.ShowMessage("好马不吃回头草");
+                        HintBox._instance.ShowMessage("想想你马怎么走");
                         return;
                     }
                     Material material = new Material(GetComponent<MeshRenderer>().material);
                     material.color = Color.white;
                     GetComponent<MeshRenderer>().material = material;
                     flag = true;
-                    MapManager._instance.SetNextPoint(surfaceDict, position);
+                    MapManager._instance.SetNextPoint(surfaceDict, position, this.gameObject, true);
+                }
+                else if (UIManager._instance.flag == -1)
+                {
+                    if (flag == false || !MapManager._instance.nextPointList.Contains(position))
+                    {
+                        HintBox._instance.ShowMessage("走错了，笨比");
+                        return;
+                    }
+                    flag = false;
+                    Material material = new Material(GetComponent<MeshRenderer>().material);
+                    material.color = Color.magenta;
+                    GetComponent<MeshRenderer>().material = material;
+                    MapManager._instance.SetNextPoint(surfaceDict, position, this.gameObject, true);
+                    Check();
                 }
             }
             end = start;
+        }
+
+        private void Check()
+        {
+            MapManager._instance.Check();
         }
     }
 
