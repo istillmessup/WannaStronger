@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Game04/Main.unity
+- path: Assets/Game05/Main.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

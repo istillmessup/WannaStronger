@@ -158,17 +158,17 @@ namespace Game01
             {
                 if (gridValueDict[item.Key] != item.Value)
                 {
-                    transform.Find("Restart").gameObject.SetActive(true);
-                    transform.Find("Menu").gameObject.SetActive(true);
-                    GameObject score = transform.Find("Image").gameObject;
-                    score.SetActive(true);
-                    score.GetComponentInChildren<Text>().text = string.Format("你的成绩\n[{0:D2} : {1:D2}]", minute, second);
+                    
                     return false;
                 }
             }
             flag = true;
             // 显示结算面板
-
+            transform.Find("Restart").gameObject.SetActive(true);
+            transform.Find("Menu").gameObject.SetActive(true);
+            GameObject score = transform.Find("Image").gameObject;
+            score.SetActive(true);
+            score.GetComponentInChildren<Text>().text = string.Format("你的成绩\n[{0:D2} : {1:D2}]", minute, second);
             return true;
         }
 
