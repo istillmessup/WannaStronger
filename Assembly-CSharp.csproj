@@ -76,6 +76,8 @@
     <Compile Include="Assets\Game04\Scripts\UIManager.cs" />
     <Compile Include="Assets\Game05\GridController.cs" />
     <Compile Include="Assets\Game05\MapManager.cs" />
+    <Compile Include="Assets\Game06\GridController.cs" />
+    <Compile Include="Assets\Game06\MapManager.cs" />
     <Compile Include="Assets\NewBehaviourScript.cs" />
     <Compile Include="Assets\SerializableDictionary\Example\SerializableDictionaryExample.cs" />
     <Compile Include="Assets\SerializableDictionary\Example\UserSerializableDictionaries.cs" />
