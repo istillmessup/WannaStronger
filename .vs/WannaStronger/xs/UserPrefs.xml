@@ -1,10 +1,18 @@
 ﻿<Properties StartupConfiguration="{343AE949-22C3-5766-4E71-5DFF538EF8E0}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game02/MapManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Game06/MapManager.cs">
     <Files>
+      <File FileName="Assets/Game01/MapManager.cs" Line="29" Column="32" />
+      <File FileName="Assets/Game03/MapManager.cs" Line="88" Column="14" />
+      <File FileName="Assets/Game02/MapManager.cs" Line="33" Column="28" />
+      <File FileName="Assets/Game02/GridController.cs" Line="26" Column="14" />
+      <File FileName="Assets/Game03/GridController.cs" Line="22" Column="39" />
       <File FileName="Assets/Game01/GridController.cs" Line="1" Column="1" />
-      <File FileName="Assets/Game01/MapManager.cs" />
-      <File FileName="Assets/Game02/MapManager.cs" Line="228" Column="1" />
-      <File FileName="Assets/Game02/GridController.cs" />
+      <File FileName="Assets/Game04/Scripts/CubeController.cs" Line="88" Column="1" />
+      <File FileName="Assets/Game04/Scripts/MapManager.cs" Line="17" Column="1" />
+      <File FileName="Assets/Game04/Scripts/UIManager.cs" Line="18" Column="1" />
+      <File FileName="Assets/Game05/MapManager.cs" Line="33" Column="81" />
+      <File FileName="Assets/Game06/MapManager.cs" Line="33" Column="10" />
+      <File FileName="Assets/Game06/GridController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +20,13 @@
           <Node name="WannaStronger" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Game01" expanded="True" />
-              <Node name="Game02" expanded="True">
+              <Node name="Game02" expanded="True" />
+              <Node name="Game03" expanded="True" />
+              <Node name="Game04" expanded="True">
+                <Node name="Scripts" expanded="True" />
+              </Node>
+              <Node name="Game05" expanded="True" />
+              <Node name="Game06" expanded="True">
                 <Node name="MapManager.cs" selected="True" />
               </Node>
             </Node>
@@ -23,7 +37,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="cfaa00ff-d74a-467e-b535-8610d765611c" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="08dae9cb-2d97-4b23-8540-8a980f8a2978" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

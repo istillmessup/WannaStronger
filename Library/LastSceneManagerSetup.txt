@@ -1,5 +1,25 @@
 sceneSetups:
-- path: Assets/Game06/Main.unity
+- path: Assets/Game01/Main.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game02/Main.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game03/Main.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game04/Main.unity
   isLoaded: 1
   isActive: 1
+  isSubScene: 0
+- path: Assets/Game05/Main.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game06/Main.unity
+  isLoaded: 1
+  isActive: 0
   isSubScene: 0

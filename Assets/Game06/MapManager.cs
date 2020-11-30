@@ -13,6 +13,11 @@ namespace Game06
         public GameObject gridPrefab_green;
         public GameObject gridPrefab_purple;
         public Dictionary<Vector2, GameObject> gridDict = new Dictionary<Vector2, GameObject>();
+        public Text timerText; // 计时文本
+
+        private float timer = 0.0f; // 三个用于计时⌛️的参数
+        private int minute = 0;
+        private int second = 0;
 
         private void Awake()
         {
@@ -25,6 +30,15 @@ namespace Game06
                     gridDict[new Vector2(0, i)].GetComponent<Button>().enabled = true;
                 }
             });
+        }
+
+        private void Update()
+        {
+            //TODO:计时
+            timer += Time.deltaTime;
+            minute = (int)(timer / 60);
+            second = (int)timer - minute * 60;
+            timerText.text = string.Format("[{0:D2} : {1:D2}]", minute, second);
         }
 
         private void Init()

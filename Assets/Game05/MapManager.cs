@@ -9,16 +9,28 @@ namespace Game05
     {
         private Dictionary<Vector2, GridController> gridDict = new Dictionary<Vector2, GridController>();
         private Dictionary<Vector2, GridController> gridTargetDict = new Dictionary<Vector2, GridController>();
-
+        private float timer = 0.0f; // 三个用于计时⌛️的参数
+        private int minute = 0;
+        private int second = 0;
 
         public static MapManager _instance;
         public GameObject gridPrefab;
+        public Text timerText; // 计时文本
 
         private void Awake()
         {
             _instance = this;
             Init();
             SetTarget();
+        }
+
+        private void Update()
+        {
+            //TODO:计时
+            timer += Time.deltaTime;
+            minute = (int)(timer / 60);
+            second = (int)timer - minute * 60;
+            timerText.text = string.Format("[{0:D2} : {1:D2}]", minute, second);
         }
 
         private void Init()
@@ -69,6 +81,7 @@ namespace Game05
                             gridTargetDict[new Vector2(x, y + 1)].OnClick();
                         }
                         gridTargetDict[new Vector2(x, y)].OnClick();
+                        // Debug.Log(new Vector2(x, y));
                     }
                 }
             }
@@ -96,6 +109,7 @@ namespace Game05
                             gridTargetDict[new Vector2(x, y + 1)].OnClick();
                         }
                         gridTargetDict[new Vector2(x, y)].OnClick();
+                        // Debug.Log(new Vector2(x, y));
                     }
                 }
             }

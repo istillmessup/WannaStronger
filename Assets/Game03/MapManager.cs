@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 namespace Game03
 {
@@ -14,10 +15,15 @@ namespace Game03
         public GameObject gridPrefab;
         public Color[] color;
         public Button button1, button2, button3;
+        public Text timerText; // 计时文本
 
         private Dictionary<Vector2, Transform> gridDict = new Dictionary<Vector2, Transform>();
         private List<Color> gridColorList = new List<Color>();
         private Transform gridParent;
+        private float timer = 0.0f; // 三个用于计时⌛️的参数
+        private int minute = 0;
+        private int second = 0;
+        private bool flag1 = false; // 这个标记位用来判断游戏是否结束
 
         private void Awake()
         {
@@ -73,10 +79,19 @@ namespace Game03
         private void Update()
         {
             //TODO:计时
+            if (!flag1)
+            {
+                timer += Time.deltaTime;
+                minute = (int)(timer / 60);
+                second = (int)timer - minute * 60;
+                timerText.text = string.Format("[{0:D2} : {1:D2}]", minute, second);
+            }
         }
 
         private void Init()
         {
+            flag = false;
+            flag1 = false;
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
@@ -265,7 +280,41 @@ namespace Game03
                     }
                 }
             }
+            flag1 = true;
+            // 显示结算面板
+            transform.Find("Restart").gameObject.SetActive(true);
+            transform.Find("Menu").gameObject.SetActive(true);
+            GameObject score = transform.Find("Image").gameObject;
+            score.SetActive(true);
+            score.GetComponentInChildren<Text>().text = string.Format("你的成绩\n[{0:D2} : {1:D2}]", minute, second);
             return true;
+        }
+
+        // TODO:重新开始、回主菜单两个函数
+        public void OnRestart()
+        {
+            // 销毁场景中的prefab
+            foreach (Transform trans in transform.Find("GridParent"))
+            {
+                Destroy(trans.gameObject);
+            }
+            // 隐藏面板
+            transform.Find("Restart").gameObject.SetActive(false);
+            transform.Find("Menu").gameObject.SetActive(false);
+            transform.Find("Image").gameObject.SetActive(false);
+            // 清除数据结构
+            gridDict.Clear();
+            gridColorList.Clear();
+            // 重新加载场景
+            SetColorList();
+            Init();
+            timer = 0;
+
+        }
+
+        public void OnBackToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game04
 {
@@ -13,7 +14,10 @@ namespace Game04
         private GameObject currCube;
         // 立方体的坐标以及对应的GameObject(这个数据结构是为了方便更改立方体的材质)
         private Dictionary<Vector3, GameObject> cubeDict = new Dictionary<Vector3, GameObject>();
-        
+        private float timer = 0.0f; // 三个用于计时⌛️的参数
+        private int minute = 0;
+        private int second = 0;
+
         [HideInInspector]
         public GameObject cubePrefab;
         // 下一步可以被点击的立方体
@@ -22,6 +26,7 @@ namespace Game04
         // 路径上所有点的顺序集合
         [HideInInspector]
         public List<Vector3> pointList = new List<Vector3>();
+        public Text timerText; // 计时文本
 
         private void Awake()
         {
@@ -41,6 +46,11 @@ namespace Game04
                 float y = Input.GetAxis("Mouse Y");
                 transform.Rotate(new Vector3(y, -x, 0) * 6, Space.World);
             }
+            //TODO:计时
+            timer += Time.deltaTime;
+            minute = (int)(timer / 60);
+            second = (int)timer - minute * 60;
+            timerText.text = string.Format("[{0:D2} : {1:D2}]", minute, second);
         }
 
         private void Init()

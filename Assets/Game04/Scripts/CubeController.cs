@@ -45,7 +45,7 @@ namespace Game04
                     }
                     if (MapManager._instance.nextPointList.Contains(position) == false)
                     {
-                        HintBox._instance.ShowMessage("想想你马怎么走");
+                        HintBox._instance.ShowMessage("想想马怎么走");
                         return;
                     }
                     Material material = new Material(GetComponent<MeshRenderer>().material);

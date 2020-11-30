@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Game02
 {
@@ -13,11 +14,16 @@ namespace Game02
         public GameObject rotatorPrefab;
         public Color[] color;
         public List<Color> gridColorList = new List<Color>();
+        public Text timerText; // 计时文本
 
         private List<Color> targetColorList = new List<Color>();
         private Transform gridParent;
         private Dictionary<Vector2, Transform> rotateDict = new Dictionary<Vector2, Transform>();
         private int flag = 1;
+        private float timer = 0.0f; // 三个用于计时⌛️的参数
+        private int minute = 0;
+        private int second = 0;
+        private bool flag1 = false; // 这个标记位用来判断游戏是否结束
 
         private void Awake()
         {
@@ -30,7 +36,13 @@ namespace Game02
 
         private void Update()
         {
-            
+            if (!flag1)
+            {
+                timer += Time.deltaTime;
+                minute = (int)(timer / 60);
+                second = (int)timer - minute * 60;
+                timerText.text = string.Format("[{0:D2} : {1:D2}]", minute, second);
+            }
         }
 
         // 这个方法里面有大量的重复代码，可以对此进行封装
@@ -38,6 +50,7 @@ namespace Game02
         // 不要为我为什么不做，因为我懒
         private void Init()
         {
+            flag1 = false;
             for (int i = 0; i < 6; i++)
             {
                 flag = 1;
@@ -260,7 +273,18 @@ namespace Game02
 
         public bool Check()
         {
-            return (CheckA(2, 1, 0) && CheckA(8, 1, 2) && CheckA(5, 4, 4) && CheckB(5, 0, 1) && CheckB(2, 3, 3) && CheckB(8, 3, 5));
+            if (CheckA(2, 1, 0) && CheckA(8, 1, 2) && CheckA(5, 4, 4) && CheckB(5, 0, 1) && CheckB(2, 3, 3) && CheckB(8, 3, 5))
+            {
+                flag1 = true;
+                // 显示结算面板
+                transform.Find("Restart").gameObject.SetActive(true);
+                transform.Find("Menu").gameObject.SetActive(true);
+                GameObject score = transform.Find("Image").gameObject;
+                score.SetActive(true);
+                score.GetComponentInChildren<Text>().text = string.Format("你的成绩\n[{0:D2} : {1:D2}]", minute, second);
+                return true;
+            }
+            return false;
         }
 
         private bool CheckA(int x, int y, int index)
@@ -318,10 +342,19 @@ namespace Game02
             gridColorList.Clear();
             rotateDict.Clear();
             targetColorList.Clear();
+            // 隐藏面板
+            transform.Find("Restart").gameObject.SetActive(false);
+            transform.Find("Menu").gameObject.SetActive(false);
+            transform.Find("Image").gameObject.SetActive(false);
 
             SetTargetList();
             SetColorList();
             Init();
+        }
+
+        public void OnBackToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }
