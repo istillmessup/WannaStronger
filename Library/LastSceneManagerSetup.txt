@@ -1,25 +1,33 @@
 sceneSetups:
-- path: Assets/Game01/Main.unity
+- path: Assets/Game01/game01.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Game02/Main.unity
+- path: Assets/Game02/game02.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Game03/Main.unity
+- path: Assets/Game03/game03.unity
   isLoaded: 0
   isActive: 0
   isSubScene: 0
-- path: Assets/Game04/Main.unity
+- path: Assets/Game04/game04.unity
+  isLoaded: 1
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game05/game05.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Game06/game06.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/start.unity
+  isLoaded: 0
+  isActive: 0
+  isSubScene: 0
+- path: Assets/Scenes/main.unity
   isLoaded: 1
   isActive: 1
-  isSubScene: 0
-- path: Assets/Game05/Main.unity
-  isLoaded: 1
-  isActive: 0
-  isSubScene: 0
-- path: Assets/Game06/Main.unity
-  isLoaded: 1
-  isActive: 0
   isSubScene: 0

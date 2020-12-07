@@ -23,6 +23,7 @@ namespace Game02
             if (MapManager._instance.Check())
             {
                 Debug.Log("game over");
+                Status.stat = true;
             }
         }
     }

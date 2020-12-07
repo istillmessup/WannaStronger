@@ -143,6 +143,7 @@ namespace Game04
             {
                 HintBox._instance.ShowMessage("牛逼");
                 GameObject.Find("MapManager").gameObject.SetActive(false);
+                Status.stat = true;
             }
         }
 

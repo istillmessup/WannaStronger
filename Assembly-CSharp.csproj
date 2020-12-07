@@ -78,9 +78,36 @@
     <Compile Include="Assets\Game05\MapManager.cs" />
     <Compile Include="Assets\Game06\GridController.cs" />
     <Compile Include="Assets\Game06\MapManager.cs" />
+    <Compile Include="Assets\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\LitJson\JsonData.cs" />
+    <Compile Include="Assets\LitJson\JsonException.cs" />
+    <Compile Include="Assets\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\LitJson\JsonMockWrapper.cs" />
+    <Compile Include="Assets\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\LitJson\Lexer.cs" />
+    <Compile Include="Assets\LitJson\Netstandard15Polyfill.cs" />
+    <Compile Include="Assets\LitJson\ParserToken.cs" />
     <Compile Include="Assets\SerializableDictionary\Example\SerializableDictionaryExample.cs" />
     <Compile Include="Assets\SerializableDictionary\Example\UserSerializableDictionaries.cs" />
     <Compile Include="Assets\SerializableDictionary\SerializableDictionary.cs" />
+    <Compile Include="Assets\script\GameData.cs" />
+    <Compile Include="Assets\script\NewMonoBehaviour.cs" />
+    <Compile Include="Assets\script\NewMonoBehaviour1.cs" />
+    <Compile Include="Assets\script\fish\AudioManager.cs" />
+    <Compile Include="Assets\script\fish\Fish_Attr.cs" />
+    <Compile Include="Assets\script\fish\Getcollider.cs" />
+    <Compile Include="Assets\script\fish\LoginPanel.cs" />
+    <Compile Include="Assets\script\fish\Move.cs" />
+    <Compile Include="Assets\script\fish\SideCollider.cs" />
+    <Compile Include="Assets\script\fish\UIMgr.cs" />
+    <Compile Include="Assets\script\fish\backStart.cs" />
+    <Compile Include="Assets\script\fish\effict\Ef_WaterWave.cs" />
+    <Compile Include="Assets\script\fish\ifBuy.cs" />
+    <Compile Include="Assets\script\fish\scripts_am\FishCtrl.cs" />
+    <Compile Include="Assets\script\fish\scripts_am\GameFish.cs" />
+    <Compile Include="Assets\script\fish\scripts_am\MainPanel.cs" />
+    <Compile Include="Assets\script\fish\scripts_am\ShopFish.cs" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2019.4.2f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -118,6 +118,7 @@ namespace Game06
                         if (x == 6)
                         {
                             print("你赢了，真牛");
+                            Status.stat = true;
                             return;
                         }
                         else
